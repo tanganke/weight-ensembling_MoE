@@ -1,0 +1,11 @@
+defaults:
+  - hf_lm
+  - _self_
+
+# https://huggingface.co/google/flan-t5-xxl
+model_name_or_path: google/flan-t5-xxl
+
+tokenizer_kwargs:
+  padding: max_length
+  truncation: true
+  return_tensors: pt

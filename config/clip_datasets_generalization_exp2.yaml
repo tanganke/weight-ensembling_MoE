@@ -1,0 +1,15 @@
+seen_datasets:
+  - SUN397
+  - Cars
+  # - RESISC45
+  - EuroSAT
+  # - SVHN
+  - GTSRB
+  - MNIST
+  - DTD
+
+unseen_datasets:
+  - RESISC45
+  - SVHN
+
+datasets: ???

@@ -1,0 +1,16 @@
+name: glue-qqp
+
+datasets:
+  _target_: datasets.load_dataset
+  path: glue
+  name: qqp
+
+preprocessor:
+  _target_: src.tasks.QQP_Preprocessor
+  template_file: glue_v1/qqp.json
+
+map_kwargs:
+  remove_columns: ["question1", "question2", "label", "idx"]
+  batched: true
+  num_proc: 1
+  desc: Running tokenizer on dataset

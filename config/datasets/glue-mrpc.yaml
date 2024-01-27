@@ -1,0 +1,16 @@
+name: glue-mrpc
+
+datasets:
+  _target_: datasets.load_dataset
+  path: glue
+  name: mrpc
+
+preprocessor:
+  _target_: src.tasks.MRPC_Preprocessor
+  template_file: glue_v1/mrpc.json
+
+map_kwargs:
+  remove_columns: ["sentence1", "sentence2", "label", "idx"]
+  batched: true
+  num_proc: 1
+  desc: Running tokenizer on dataset

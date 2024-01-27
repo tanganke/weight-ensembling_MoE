@@ -1,0 +1,6 @@
+name: glue-ax
+
+datasets:
+  _target_: datasets.load_dataset
+  path: glue
+  name: ax

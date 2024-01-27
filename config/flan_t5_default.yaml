@@ -1,0 +1,37 @@
+defaults:
+  - hydra: default
+  - models: flan-t5-base
+  - peft: lora-16
+  - optim: mezo
+  - _self_
+
+seed: 42
+model: ${.models}
+
+test_datasets:
+  - glue-cola
+  - glue-mnli
+  - glue-mrpc
+  - glue-qnli
+  - glue-qqp
+  - glue-rte
+  - glue-sst2
+  - glue-stsb
+
+# DataLoader
+batch_size: 8
+num_workers: 8
+
+# pytorch lightning Trainer
+trainer:
+  accelerator: gpu
+  devices: 1
+  max_epochs: 5
+  max_steps: -1
+  accumulate_grad_batches: 1
+  profiler: simple
+  enable_checkpointing: true # manually save checkpoints
+  fast_dev_run: false
+
+checkpoint_path: null # path to checkpoint to load
+fast_dev_run: false

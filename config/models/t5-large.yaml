@@ -1,0 +1,6 @@
+defaults:
+  - hf_lm
+  - _self_
+
+# https://huggingface.co/t5-large
+model_name_or_path: t5-large

@@ -1,0 +1,46 @@
+defaults:
+  - hydra: default
+  - _self_
+
+fast_dev_run: false
+
+exp_name: null
+version: null
+
+model: "ViT-B-32"
+device: cuda
+data_location: ???
+
+model_seen_datasets: null
+seen_datasets: ${test_datasets}
+test_datasets:
+  - SUN397
+  - Cars
+  - RESISC45
+  - EuroSAT
+  - SVHN
+  - GTSRB
+  - MNIST
+  - DTD
+datasets: ${test_datasets}
+
+ls: 0.0
+warmup_length: 500
+epochs: 10
+load: null
+save: ??? # path to checkpoints, for example: cache/checkpoints/task_vectors_checkpoints/ViT-B-32
+
+# optimizer
+lr: 0.001 # learning rate
+wd: 0  # weight decay
+
+# dataloader
+batch_size: 16
+num_workers: 1
+
+sam_retraining: false
+
+# corruption type on dataset (string)
+corruption: null
+
+forward_device: 0

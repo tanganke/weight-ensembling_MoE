@@ -1,0 +1,16 @@
+name: glue-mnli
+
+datasets:
+  _target_: datasets.load_dataset
+  path: glue
+  name: mnli
+
+preprocessor:
+  _target_: src.tasks.MNLI_Preprocessor
+  template_file: glue_v1/mnli.json
+
+map_kwargs:
+  remove_columns: ["idx", "hypothesis", "premise", "label"]
+  batched: true
+  num_proc: 1
+  desc: Running tokenizer on dataset

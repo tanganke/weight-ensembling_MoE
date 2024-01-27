@@ -1,0 +1,5 @@
+optimizer:
+  _target_: src.mezo.MeZO
+  lr: 1e-5
+  weight_decay: 0
+  

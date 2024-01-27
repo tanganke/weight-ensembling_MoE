@@ -1,0 +1,9 @@
+defaults:
+  - hf_lm
+  - _self_
+
+# https://huggingface.co/t5-large
+model_name_or_path: google/flan-t5-base
+name: flan-t5-base
+
+linearize: true

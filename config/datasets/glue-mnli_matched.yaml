@@ -1,0 +1,4 @@
+datasets:
+  _target_: datasets.load_dataset
+  path: glue
+  name: mnli_matched

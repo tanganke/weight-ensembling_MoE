@@ -1,0 +1,18 @@
+model:
+  _target_: transformers.BertModel.from_pretrained
+  pretrained_model_name_or_path: ${..model_name_or_path}
+
+tokenizer:
+  _target_: transformers.BertTokenizer.from_pretrained
+  pretrained_model_name_or_path: ${..model_name_or_path}
+
+# https://huggingface.co/bert-base-uncased
+model_name_or_path: bert-base-uncased
+name: ${.model_name_or_path}
+
+linearize: true
+
+tokenizer_kwargs:
+  padding: max_length
+  truncation: true
+  return_tensors: pt

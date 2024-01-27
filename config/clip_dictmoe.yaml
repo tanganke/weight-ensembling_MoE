@@ -1,0 +1,17 @@
+defaults:
+  - clip_default
+  - _self_
+
+exp_name: clip_dictmoe
+
+init_lambda: 0.3
+
+tta: true
+evaluate: false
+
+batch_size: 16
+tta_batch_size: 16
+eval_batch_size: 64
+
+num_devices: 1
+router_hidden_layers: 2

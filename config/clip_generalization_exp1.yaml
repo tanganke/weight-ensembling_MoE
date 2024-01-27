@@ -1,0 +1,29 @@
+defaults:
+  - hydra: default
+  - clip_datasets_generalization_exp1
+  - _self_
+
+fast_dev_run: false
+
+exp_name: null
+model: "ViT-B-32"
+device: cuda
+data_location: ???
+eval_datasets: null
+train_dataset: null
+
+ls: 0.0
+warmup_length: 500
+epochs: 10
+load: null
+save: ???
+
+# optimizer
+lr: 0.001 # learning rate
+wd: 0.1  # weight decay
+
+# dataloader
+batch_size: 16
+num_workers: 4
+
+sam_retraining: false

@@ -1,0 +1,15 @@
+model:
+  _target_: transformers.AutoModelForSeq2SeqLM.from_pretrained
+  pretrained_model_name_or_path: ${..model_name_or_path}
+
+tokenizer:
+  _target_: transformers.AutoTokenizer.from_pretrained
+  pretrained_model_name_or_path: ${..model_name_or_path}
+
+model_name_or_path: ???
+name: ${.model_name_or_path}
+
+tokenizer_kwargs:
+  padding: max_length
+  truncation: true
+  return_tensors: pt

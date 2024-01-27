@@ -1,0 +1,16 @@
+name: glue-qnli
+
+datasets:
+  _target_: datasets.load_dataset
+  path: glue
+  name: qnli
+
+preprocessor:
+  _target_: src.tasks.QNLI_Preprocessor
+  template_file: glue_v1/qnli.json
+
+map_kwargs:
+  remove_columns: ["question", "sentence", "idx"]
+  batched: true
+  num_proc: 1
+  desc: Running tokenizer on dataset

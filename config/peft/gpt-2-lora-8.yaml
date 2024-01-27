@@ -1,0 +1,7 @@
+defaults:
+  - lora-8
+  - _self_
+  
+peft_config:
+  target_modules:
+    - c_attn

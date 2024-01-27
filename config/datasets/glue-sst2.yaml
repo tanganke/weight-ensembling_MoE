@@ -1,0 +1,16 @@
+name: glue-sst2
+
+datasets:
+  _target_: datasets.load_dataset
+  path: glue
+  name: sst2
+
+preprocessor:
+  _target_: src.tasks.SST2_Preprocessor
+  template_file: glue_v1/sst2.json
+
+map_kwargs:
+  remove_columns: ["sentence", "label", "idx"]
+  batched: true
+  num_proc: 1
+  desc: Running tokenizer on dataset
