@@ -32,11 +32,15 @@ from src.utils import timeit_context
 class Program:
     def __init__(self, cfg: DictConfig):
         self.cfg = cfg
+        if cfg.model is None:
+            raise ValueError("model must be specified")
 
         self.result_dir = RESULTS_DIR / cfg.exp_name / cfg.model
         if cfg.version is not None:
             self.result_dir /= f"version_{cfg.version}"
         self.result_dir.mkdir(exist_ok=True, parents=True)
+        log.info(f'files will save to {self.result_dir}')
+        # save `cfg` to result_dir`
         self.result_path = self.result_dir / "results.csv"
 
         self.fabric = L.Fabric(
@@ -69,6 +73,8 @@ class Program:
             self.evaluate()
 
     def tta(self):
+        OmegaConf.save(self.cfg, self.result_dir / "tta_config.yaml")
+
         model = deepcopy(self.model)
         optimizer = torch.optim.Adam((p for p in model.parameters() if p.requires_grad), lr=self.cfg.lr)
         model, optimizer = self.fabric.setup(model, optimizer)
@@ -92,9 +98,9 @@ class Program:
             self.fabric.backward(losses)
             optimizer.step()
 
-            lr_scheduler.step(step_idx)
+            lr_scheduler.step()
 
-            print(f"step={step_idx}, loss={losses.item()}")
+            # print(f"step={step_idx}, loss={losses.item()}")
 
             if (step_idx + 1) % 100 == 0:
                 (self.result_dir / "checkpoints").mkdir(exist_ok=True)
@@ -106,7 +112,7 @@ class Program:
     def evaluate(self):
         results = defaultdict(list)
 
-        for step_idx in tqdm(range(100,1001,100), "evaluating", leave=False):
+        for step_idx in tqdm([1000, 500], "evaluating", leave=False):
             state_dict = torch.load(self.result_dir / "checkpoints" / f"model_step={step_idx}.ckpt", map_location="cpu")
             if len(state_dict) == 1 and "model" in state_dict:
                 state_dict = state_dict["model"]
@@ -148,7 +154,7 @@ class Program:
                     pbar.set_postfix_str(f"acc={acc:.2f}")
                 results[dataset_name].append(acc)
             (df := pd.DataFrame(results)).to_csv(self.result_path, index=False)
-            print(df)
+            log.info(df)
 
     def load_clip_models(self):
         """
