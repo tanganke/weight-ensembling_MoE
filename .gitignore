@@ -9,6 +9,7 @@ lightning_logs/
 *.backup*
 /data
 .DS_Store
+*.ckpt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
