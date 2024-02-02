@@ -4,7 +4,7 @@
 
 ## Experimental Results
 
-The results of the experiments in paper is placed at [results](./results).
+The results of the experiments in the paper are placed at [results](./results/README.md).
 
 ## Acknowledgements
 
