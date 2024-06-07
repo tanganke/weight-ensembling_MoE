@@ -1,3 +1,5 @@
+I reimplemented this using the CLIP models from HuggingFace at https://github.com/tanganke/fusion_bench
+
 # Merging Multi-Task Models via Weight-Emsembling Mixture of Experts
 
 ![overview](figure/overview.png)
